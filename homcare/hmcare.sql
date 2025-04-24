@@ -16,7 +16,9 @@ CREATE TABLE Patient (
     address VARCHAR(100),
     dob DATE,
     sex VARCHAR(10) CHECK (sex IN ('Female', 'Male', 'Others')),
-    phone_number VARCHAR(15)
+    phone_number VARCHAR(15),
+    eid INTEGER,
+    FOREIGN KEY (eid) REFERENCES Employee(eid)
 );
 
 CREATE TABLE EmergencyContact (
@@ -24,11 +26,18 @@ CREATE TABLE EmergencyContact (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     email VARCHAR(50),
-    relationship VARCHAR(10) CHECK (relationship IN ('Parent', 'Sibling', 'Spouse', 'Child', 'Friend', 'Doctor', 'Others')),
-    phone_number VARCHAR(15),
+    phone_number VARCHAR(15)
+);
+
+CREATE TABLE Relationship (
+    eid INTEGER,
     pid INTEGER,
+    relationship VARCHAR(10) CHECK (relationship IN ('Parent', 'Sibling', 'Spouse', 'Child', 'Friend', 'Doctor', 'Others')),
+    PRIMARY KEY (eid, pid),
+    FOREIGN KEY (eid) REFERENCES EmergencyContact(eid),
     FOREIGN KEY (pid) REFERENCES Patient(pid)
 );
+
 
 CREATE TABLE DrugStock (
     pid INTEGER,
