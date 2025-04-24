@@ -16,9 +16,7 @@ CREATE TABLE Patient (
     address VARCHAR(100),
     dob DATE,
     sex VARCHAR(10) CHECK (sex IN ('Female', 'Male', 'Others')),
-    phone_number VARCHAR(15),
-    eid INTEGER,
-    FOREIGN KEY (eid) REFERENCES Employee(eid)
+    phone_number VARCHAR(15)
 );
 
 CREATE TABLE EmergencyContact (
